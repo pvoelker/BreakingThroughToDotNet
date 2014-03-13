@@ -73,7 +73,7 @@
 copy /Y "$(TargetDir)KeypadWinFormLib.tlb" "$(ProjectDir)..\TypeLibs"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>rc.exe /r "$(ProjectDir)KeypadControl.rc"
+    <PreBuildEvent>"C:\Program Files (x86)\Windows Kits\8.0\bin\x86\rc.exe" /r "$(ProjectDir)KeypadControl.rc"
 </PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
