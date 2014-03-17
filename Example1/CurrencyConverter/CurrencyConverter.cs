@@ -36,7 +36,8 @@ namespace CurrencyConverter
         DateTime ExchangeRateDateTime { get; }
         int CurrenciesSupported { get; }
         decimal GetCurrentExchangeRateAgainstUSD(CurrencyType type);
-        decimal ConvertCurrency(CurrencyType currencyHave, decimal currencyHaveAmount, CurrencyType currencyWant);
+        decimal ConvertCurrency(CurrencyType currencyHave,
+            decimal currencyHaveAmount, CurrencyType currencyWant);
     }
 
     // Implementation for interface
@@ -128,23 +129,27 @@ namespace CurrencyConverter
             return exchangeRate;
         }
 
-        public decimal ConvertCurrency(CurrencyType currencyHave, decimal currencyHaveAmount, CurrencyType currencyWant)
+        public decimal ConvertCurrency(CurrencyType currencyHave,
+            decimal currencyHaveAmount, CurrencyType currencyWant)
         {
             if (IsCurrencySupported(currencyHave) == false)
             {
-                ArgumentException ex = new ArgumentException("Unsupported currency type", "currencyHave");
-                Debug.WriteLine("BreakingThroughToDotNetExample1.CurrencyConverter.ConvertCurrency Error: " + ex.ToString());
+                ArgumentException ex =
+                    new ArgumentException("Unsupported currency type", "currencyHave");
+                Debug.WriteLine("***ERROR*** BreakingThroughToDotNetExample1.CurrencyConverter.ConvertCurrency Error: " + ex.ToString());
                 throw ex;
             }
             else if(IsCurrencySupported(currencyWant) == false)
             {
-                ArgumentException ex = new ArgumentException("Unsupported currency type", "currencyWant");
-                Debug.WriteLine("BreakingThroughToDotNetExample1.CurrencyConverter.ConvertCurrency Error: " + ex.ToString());
+                ArgumentException ex =
+                    new ArgumentException("Unsupported currency type", "currencyWant");
+                Debug.WriteLine("***ERROR*** BreakingThroughToDotNetExample1.CurrencyConverter.ConvertCurrency Error: " + ex.ToString());
                 throw ex;
             }
             else
             {
-                decimal currencyWantAmount = currencyHaveAmount / GetCurrentExchangeRateAgainstUSD(currencyHave);
+                decimal currencyWantAmount =
+                    currencyHaveAmount / GetCurrentExchangeRateAgainstUSD(currencyHave);
                 currencyWantAmount *= GetCurrentExchangeRateAgainstUSD(currencyWant);
                 return currencyWantAmount;
             }

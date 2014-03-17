@@ -13,7 +13,7 @@
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	CoInitialize(NULL);
+	CoInitialize(NULL); // Required to use COM
 
 	try
 	{
@@ -26,8 +26,10 @@ int _tmain(int argc, _TCHAR* argv[])
 		_tprintf(_T("| Test 1 - Convert US Dollar to Euro |\n"));
 		_tprintf(_T("+------------------------------------+\n"));
 
-		COleDateTime exchangeRateDateTime = currencyConverter->GetExchangeRateDateTime(); 
-		CString exchangeRateDateTimeStr = exchangeRateDateTime.Format(_T("%A, %B %d, %Y"));
+		COleDateTime exchangeRateDateTime =
+			currencyConverter->GetExchangeRateDateTime(); 
+		CString exchangeRateDateTimeStr =
+			exchangeRateDateTime.Format(_T("%A, %B %d, %Y"));
 
 		CString currenyNameUSDollar =
 			currencyConverter->GetCurrencyName(CurrencyType_USDollar);

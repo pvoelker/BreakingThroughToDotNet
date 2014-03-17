@@ -64,8 +64,8 @@ void TimingTests(IDenominationManagerPtr denomMgr)
 
 	denomMgr->raw_Test_TimeEnumerateDenominations(&nativeDotNetTicks);
 
-	_tprintf(_T("Weakly Type Collection Time: %d ms\n"), weaklyTypedTicks);
-	_tprintf(_T("Strongly Type Collection Time: %d ms\n"), stronglyTypedTicks);
+	_tprintf(_T("Weakly Typed Collection Time: %d ms\n"), weaklyTypedTicks);
+	_tprintf(_T("Strongly Typed Collection Time: %d ms\n"), stronglyTypedTicks);
 	_tprintf(_T("Native .NET Time: %d ms\n"), nativeDotNetTicks);
 }
 #pragma optimize( "", on ) // Turn optimizations back on

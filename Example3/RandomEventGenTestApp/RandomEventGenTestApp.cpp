@@ -53,14 +53,16 @@ int _tmain(int argc, _TCHAR* argv[])
 	m_ThreadExit = ::CreateEvent(NULL, TRUE, FALSE, _T("Thread Exit"));
 
 	DWORD threadId;
-	if (::CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)&ThreadProc, (LPVOID)NULL, 0, &threadId) == NULL)
+	if (::CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)&ThreadProc,
+		(LPVOID)NULL, 0, &threadId) == NULL)
 	{
 		_tprintf(_T("Error creating thread\n"));
 		return(1);
 	}
 	else
 	{
-		_tprintf(_T("Event processing thread created, waiting %d seconds for random events...\n\n"), runTimeSeconds);
+		_tprintf(_T("Event processing thread created, waiting %d seconds ")
+			_T("for random events...\n\n"), runTimeSeconds);
 		::Sleep(runTimeSeconds * 1000);
 		::SetEvent(m_ThreadExit);
 	}

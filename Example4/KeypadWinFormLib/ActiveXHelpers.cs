@@ -36,7 +36,8 @@ namespace ActiveXHelpers
         public static int OLEMISC_WANTSTOMENUMERGE              = 0x100000;
         public static int OLEMISC_SUPPORTSMULTILEVELUNDO        = 0x200000;
 
-        public static void RegisterClass(Type t, int bitmapId, int versionMajor, int versionMinor)
+        public static void RegisterClass(Type t, int bitmapId, int versionMajor,
+            int versionMinor)
         {
             string keyName = @"CLSID\" + t.GUID.ToString("B");
 
@@ -48,32 +49,40 @@ namespace ActiveXHelpers
             {
                 using (RegistryKey ctrl = k.CreateSubKey("Control")) { }
 
-                using (RegistryKey inprocServer32Key = k.OpenSubKey("InprocServer32", true))
+                using (RegistryKey inprocServer32Key = k.OpenSubKey("InprocServer32",
+                    true))
                 {
-                    inprocServer32Key.SetValue("CodeBase", Assembly.GetExecutingAssembly().CodeBase);
+                    inprocServer32Key.SetValue("CodeBase",
+                        Assembly.GetExecutingAssembly().CodeBase);
                 }
 
                 using (RegistryKey miscStatusKey = k.CreateSubKey("MiscStatus"))
                 {
                     int nMiscStatus = OLEMISC_RECOMPOSEONRESIZE | OLEMISC_CANTLINKINSIDE |
-                        OLEMISC_INSIDEOUT | OLEMISC_ACTIVATEWHENVISIBLE | OLEMISC_SETCLIENTSITEFIRST;
-                    miscStatusKey.SetValue("", nMiscStatus.ToString(), RegistryValueKind.String);
+                        OLEMISC_INSIDEOUT | OLEMISC_ACTIVATEWHENVISIBLE |
+                        OLEMISC_SETCLIENTSITEFIRST;
+                    miscStatusKey.SetValue("", nMiscStatus.ToString(),
+                        RegistryValueKind.String);
                 }
 
                 using (RegistryKey toolBoxBitmapKey = k.CreateSubKey("ToolboxBitmap32"))
                 {
-                    toolBoxBitmapKey.SetValue("", Assembly.GetExecutingAssembly().Location + ", " + bitmapId.ToString(), RegistryValueKind.String);
+                    toolBoxBitmapKey.SetValue("",
+                        Assembly.GetExecutingAssembly().Location + ", " +
+                        bitmapId.ToString(), RegistryValueKind.String);
                 }
 
                 using (RegistryKey typeLibKey = k.CreateSubKey("TypeLib"))
                 {
                     Guid libId = Marshal.GetTypeLibGuidForAssembly(t.Assembly);
-                    typeLibKey.SetValue("", libId.ToString("B"), RegistryValueKind.String);
+                    typeLibKey.SetValue("", libId.ToString("B"),
+                        RegistryValueKind.String);
                 }
 
                 using (RegistryKey versionKey = k.CreateSubKey("Version"))
                 {
-                    versionKey.SetValue("", string.Format("{0}.{1}", versionMajor, versionMinor));
+                    versionKey.SetValue("", string.Format("{0}.{1}", versionMajor,
+                        versionMinor));
                 }
             }
         }
